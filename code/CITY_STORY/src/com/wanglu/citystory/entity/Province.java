@@ -1,10 +1,14 @@
 package com.wanglu.citystory.entity;
 
-public class Person {
+/**
+ * 省份
+ * @author wanglu
+ *
+ */
+public class Province {
 
 	private String id;
 	private String name;
-	private int age;
 	public String getId() {
 		return id;
 	}
@@ -17,11 +21,6 @@ public class Person {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
-	}
+	
 	
 }

@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	
+
 
 
 	<settings>
@@ -22,12 +22,16 @@
 		<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString" />
 	</settings>
 	<typeAliases>
-		<typeAlias alias="Person" type="com.wanglu.citystory.entity.Person" />
+
+		<typeAlias alias="User" type="com.wanglu.citystory.entity.User" />
+		<typeAlias alias="City" type="com.wanglu.citystory.entity.City" />
+		<typeAlias alias="Province" type="com.wanglu.citystory.entity.Province" />
 	</typeAliases>
-	
+
 
 
 	<mappers>
-		 <mapper resource="com/wanglu/citystory/entity/Person.xml"/>
+
+		<mapper resource="com/wanglu/citystory/mapper/User.xml" />
 	</mappers>
 </configuration>

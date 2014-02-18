@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feiyang.entity.Province">
+	<insert id="addProvince" parameterType="Province">
+		INSERT INTO P_PROVINCE
+		VALUES(#{id},#{name})
+	</insert>
+
+
+	<select id="getAllProvinces" resultType="Province">
+		SELECT * FROM P_PROVINCE
+	</select>
+
+	<delete id="deleteProvinceById" parameterType="string">
+		DELETE FROM P_PROVINCE where id=#{id}
+
+	</delete>
+	
+	
+	<update id="updateProvince" parameterType="Province">
+		UPDATE P_PROVINCE SET name=#{name} where id=#{id}
+	</update>
+
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.feiyang.entity.City">
+
+	<resultMap type="City" id="cityReslut">
+		<id property="id" column="c_id" />
+		<result property="name" column="c_name" />
+		<association property="province" javaType="Province">
+			<id property="id" column="p_id" />
+			<result property="name" column="p_name" />
+		</association>
+	</resultMap>
+	<select id="getCityByProvinceIds" resultType="City"
+		parameterType="string">
+		SELECT id,name FROM P_CITY WHERE PROVINCEID=#{id}
+	</select>
+
+
+	<select id="getCityById" resultMap="cityReslut" parameterType="string">
+		SELECT C.id as c_id,C.name as c_name,C.provinceId,P.id as p_id,P.name as p_name 
+		from P_CITY C left outer join P_PROVINCE P on C.provinceId=P.id
+		where C.id=#{id}
+	</select>
+
+
+</mapper>

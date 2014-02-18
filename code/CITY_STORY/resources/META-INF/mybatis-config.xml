@@ -33,5 +33,7 @@
 	<mappers>
 
 		<mapper resource="com/wanglu/citystory/mapper/User.xml" />
+		<mapper resource="com/wanglu/citystory/mapper/Province.xml" />
+		<mapper resource="com/wanglu/citystory/mapper/City.xml" />
 	</mappers>
 </configuration>

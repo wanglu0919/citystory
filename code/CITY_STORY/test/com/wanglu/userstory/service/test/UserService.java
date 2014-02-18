@@ -27,7 +27,7 @@ public class UserService {
 		
 		User user =new User();
 		user.setId(UUID.randomUUID().toString());
-		user.setName("xiaowang");
+		user.setName("大家好");
 		user.setAge(15);
 		user.setCityId("asdff");
 		

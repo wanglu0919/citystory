@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+
 <!DOCTYPE html>
 
 <html  lang="en">
@@ -29,7 +32,7 @@
 								<a href="http://www.aftvc.com" target="mainFrame">管理帐号</a>
 							</li>
 							<li>
-								<a href="login.html" target="_self">退出</a>
+								<a href="./logout" target="_self">退出</a>
 							</li>
 						</ul>
 					</div>

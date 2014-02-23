@@ -5,24 +5,24 @@
 	version="3.0">
 
 
- <listener> 
-  		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> 
-  </listener> 
-<!-- 设置Spring容器加载配置文件路径 --> 
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- 设置Spring容器加载配置文件路径 -->
 
-  <context-param> 
-	  <param-name>contextConfigLocation</param-name> 
-	  <param-value>classpath*:/META-INF/applicationContext*.xml</param-value> 
-  </context-param>
-   
-  <!-- 配置Spring核心控制器 --> 
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:/META-INF/applicationContext*.xml</param-value>
+	</context-param>
+
+	<!-- 配置Spring核心控制器 -->
 
 
-<!-- SpringMVC配置 -->
+	<!-- SpringMVC配置 -->
 	<servlet>
 		<servlet-name>spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		 <init-param>
+		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath*:/META-INF/spring-servlet.xml</param-value>
 		</init-param>
@@ -33,5 +33,6 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+
 
 </web-app>

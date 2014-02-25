@@ -46,7 +46,7 @@ public class LoginController {
 			httpSession.setAttribute(Admin.ADMIN_SESSION_KEY, admin);
 			return "main";
 		} else {
-
+			
 			return "login";
 		}
 

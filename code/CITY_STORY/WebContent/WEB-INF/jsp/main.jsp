@@ -5,6 +5,14 @@
 
 <html  lang="en">
 	<head>
+	
+	<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
+%>
+<base href="<%=basePath%>">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>大城小事管理后台 </title>
 
@@ -55,10 +63,10 @@
 						<div id="collapseOne" class="accordion-body collapse in">
 							<div class="accordion-inner">
 								<li>
-									<a href="http://www.865171.cn" target="main">添加用户</a>
+									<a href="http://www.865171.cn" target="mainFrame">添加用户</a>
 								</li>
 								<li>
-									<a href="http://www.865171.cn" target="main">查询用户</a>
+									<a href="./admin/to_upload" target="mainFrame">上传demo</a>
 								</li>
 
 							</div>
@@ -66,11 +74,16 @@
 					</div>
 					<div class="accordion-group">
 						<div class="accordion-heading">
-							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">语录管理</a>
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">地区管理</a>
 						</div>
 						<div id="collapseTwo" class="accordion-body collapse">
 							<div class="accordion-inner">
-								语录增加
+								<li>
+									<a href="./admin/provinces" target="mainFrame">省份</a>
+								</li>
+								<li>
+									<a href="http://www.865171.cn" target="mainFrame">城市</a>
+								</li>
 							</div>
 						</div>
 					</div>

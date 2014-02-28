@@ -42,4 +42,15 @@ public class ProvinceDaoImpl extends BaseImpl implements ProvinceDao {
 		return provinces;
 	}
 
+	@Override
+	public Province getProvinceById(String id) {
+
+		SqlSession sqlSession = getSession();
+		Province p = sqlSession.selectOne("getProviceById", id);
+		
+		sqlSession.close();
+
+		return p;
+	}
+
 }

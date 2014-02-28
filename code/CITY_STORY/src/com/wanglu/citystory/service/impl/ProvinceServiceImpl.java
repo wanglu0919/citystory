@@ -37,4 +37,10 @@ public class ProvinceServiceImpl implements IProvinceService {
 		return provinceDao.deleteProvince(id);
 	}
 
+	@Override
+	public Province getProvinceById(String id) {
+		
+		return provinceDao.getProvinceById(id);
+	}
+
 }

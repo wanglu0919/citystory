@@ -11,6 +11,10 @@
 	<select id="getAllProvinces" resultType="Province">
 		SELECT * FROM P_PROVINCE
 	</select>
+	
+	<select id="getProviceById" resultType="Province" parameterType="string">
+		SELECT * FROM P_PROVINCE where id=#{id}
+	</select>
 
 	<delete id="deleteProvinceById" parameterType="string">
 		DELETE FROM P_PROVINCE where id=#{id}

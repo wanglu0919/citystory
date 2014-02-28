@@ -114,3 +114,18 @@ html, body {
 	margin: 0;
 }
 
+
+
+.well {
+background-color: #fff;
+border: 1px solid #ccc;
+-webkit-box-shadow: 1px 1px 0px #ffffff;
+-moz-box-shadow: 1px 1px 0px #ffffff;
+box-shadow: 1px 1px 0px #ffffff;
+-webkit-border-radius: 0px;
+-moz-border-radius: 0px;
+border-radius: 0px;
+-moz-background-clip: padding;
+-webkit-background-clip: padding-box;
+background-clip: padding-box;
+}

@@ -14,4 +14,6 @@ public interface IProvinceService {
 	public boolean addProvince(Province province);
 	public boolean updateProvince(Province province);
 	public boolean deleteProvince(String id);
+	
+	public Province getProvinceById(String id);
 }

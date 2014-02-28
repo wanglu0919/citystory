@@ -11,6 +11,7 @@ import com.wanglu.citystory.entity.Province;
  */
 public interface ProvinceDao {
 	public List<Province> getAllProvinces();
+	public Province getProvinceById(String id);
 	public boolean addProvince(Province province);
 	public boolean updateProvince(Province province);
 	public boolean deleteProvince(String id);

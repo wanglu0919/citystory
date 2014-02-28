@@ -79,7 +79,7 @@
 						<div id="collapseTwo" class="accordion-body collapse">
 							<div class="accordion-inner">
 								<li>
-									<a href="./admin/provinces" target="mainFrame">省份</a>
+									<a href="./admin/view/provinces" target="mainFrame">省份</a>
 								</li>
 								<li>
 									<a href="http://www.865171.cn" target="mainFrame">城市</a>

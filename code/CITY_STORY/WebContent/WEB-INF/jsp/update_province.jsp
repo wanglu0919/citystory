@@ -27,32 +27,23 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 
 <script>
-	
-	$(document).ready(function(){
-		
+	$(document).ready(function() {
+
 		$("#war").hide();
-		$("form").submit(function(){
-			
-			var provinceName=$("input[name='provinceName']").val();
-			if(provinceName==""){
-				$("#war").empty();
-				$("#war").html("城市名不能为空");
+		$("form").submit(function() {
+
+			var provinceName = $("input[name='name']").val();
+			if (provinceName == "") {
 				$("#war").show();
-				$("#result").hide();
 				return false;
-			}else{
+			} else {
 				$("#war").hide();
-				$("#result").show();
 				return true;
 			}
-			
-			
-			
+
 		});
-		
+
 	});
-	
-	
 </script>
 
 <style>
@@ -66,17 +57,17 @@
 
 		<ul class="breadcrumb">
 			<li><a href="./admin/view/provinces">列表</a> <span class="divider">/</span></li>
-			<li class="active">添加</li>
+			<li class="active">修改</li>
 
 		</ul>
 
-		<form class="form-inline" action="./admin/add/province" method="post">
-			<input type="text" placeholder="请输入城市名称" name="provinceName">
-
-			<button type="submit" class="btn">添加</button>
-			<span class="label label-warning" id="war">城市名不能为空</span>
-			
-			<span class="label label-warning" id="result">${requestScope.result}</span>
+		<form class="form-inline" action="./admin/update/province" method="post">
+			<input type="text" placeholder="请输入城市名称" name="name"
+				value="${province.name}" /> <input type="hidden"
+				placeholder="请输入城市名称" name="id" value="${province.id}" />
+			<button type="submit" class="btn">修改</button>
+			<span class="label label-warning" id="war">城市名不能为空</span> <span
+				class="label label-warning">${requestScope.result}</span>
 		</form>
 
 	</div>

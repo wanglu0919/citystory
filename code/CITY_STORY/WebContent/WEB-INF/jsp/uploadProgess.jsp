@@ -27,52 +27,39 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 
 <script>
+
+var index;
 	$(document).ready(function() {
-		$("#submit").click(function() {
-			//mprogess();
-			
-		});
-		
-		$("form").submit(function (){
-			return true;
-		});
+
+		progess();
 
 	});
 
-	var p = 0;
-	function mprogess() {
-		
+	function progess() {
+		index++;
 		$.ajax({
 			type : 'GET',
-			url : "./admin/progess2",
+			url : "./admin/progess.json",
 			success : function(data) {
 
-			
-				
-				var progess = parseInt(data);
-				 
-				if (progess < 100) {
-				
-					
-					$(".label").empty();
-					$(".label").html(data);
-					mprogess();
-					
+				var p=parseInt(data);
+				if (p < 100) {
 
+					setTimeout("progess()", 500);
+					$(".label").empty();
+					$(".label").html(data.progess);
+					
 					
 				} else {
-					
 					$(".label").empty();
-					$(".label").html(data);
+					$(".label").html(data.progess);
 				}
 
 			},
-			dataType : "text"
+			dataType : "json"
 		});
 
 	}
-
-	
 </script>
 
 <style>
@@ -81,26 +68,9 @@
 </head>
 <body>
 
-
-	<div class="container-fluid">
-
-		<form class="form-inline" action="./admin/upload" method="post"
-			enctype="multipart/form-data">
-
-			<input type="file" name="file1" /> <br /> <input type="file"
-				name="file2" /> <br /> <input type="text" name="text1"> <br />
-			<input type="text" name="text2"> <br />
-			<button type="submit" class="btn" id="submit">提交</button>
-
-
-
-		</form>
-
-		<span class="label label-warning">sss</span> <br /> <span
-			class="label2 label-warning">sss</span>
-	</div>
-
-
+	<span class="label label-warning">d</span>
+<br/>
+<span class="label2 label-warning">d</span>
 </body>
 </html>
 

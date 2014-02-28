@@ -42,7 +42,7 @@ public class AdminConsoleAuthorityInceptor implements HandlerInterceptor {
 		Admin admin = (Admin) httpSession.getAttribute(Admin.ADMIN_SESSION_KEY);// 查看用户有没有登录
 		if (admin == null) {
 			
-			response.sendRedirect("login");
+			response.sendRedirect("../login");
 
 			return false;
 

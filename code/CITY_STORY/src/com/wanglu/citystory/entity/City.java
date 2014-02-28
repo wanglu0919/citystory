@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 
-@XmlRootElement(name="asdfsdf")
+
 public class City {
 	private Province province;
 	private String id;

@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminConsoleController {
 	
 	
+	@RequestMapping("/main")
+	public String toMain(){
+		
+		return "main";
+	}
+	
 	
 
 }

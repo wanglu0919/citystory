@@ -35,8 +35,8 @@ public class HellwordController {
 		return "hellword";
 	}
 
-	@RequestMapping("/complex/{id}")
-	public String complexTest(@RequestParam String ni,@PathVariable String id,ModelMap model) {
+	@RequestMapping(value="/complex/{id}",produces="application/json")
+	public String complexTest(@PathVariable String id,ModelMap model) {
 		City city = cityService.getCityById(id);
 		model.addAttribute("city", city);
 		return "complex";

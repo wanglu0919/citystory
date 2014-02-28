@@ -31,7 +31,7 @@
 
 			</map>
 		</property>
- 		<property name="defaultContentType" value="text/html" />
+		<property name="defaultContentType" value="text/html" />
 		<property name="defaultViews">
 			<list>
 
@@ -52,7 +52,7 @@
 
 			</list>
 		</property>
-	<property name="favorParameter" value="true"/>  
+		<property name="favorParameter" value="true" />
 		<property name="ignoreAcceptHeader" value="true" />
 	</bean>
 
@@ -74,20 +74,38 @@
 
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
-		
+
 	</bean>
-	 
-	
-	  <!-- 拦截器 -->  
-    <mvc:interceptors>  
-        <!-- 多个拦截器,顺序执行 -->  
-        <mvc:interceptor>  
-           <mvc:mapping path="/admin/*" /><!-- 如果不配置或/*,将拦截所有的Controller -->  
-           <bean class="com.wanglu.citystory.interceptors.AdminConsoleAuthorityInceptor"></bean>  
-        </mvc:interceptor>  
-    </mvc:interceptors>  
-	
-	
 
 
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<!-- 多个拦截器,顺序执行 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/*" /><!-- 如果不配置或/*,将拦截所有的Controller -->
+			<bean
+				class="com.wanglu.citystory.interceptors.AdminConsoleAuthorityInceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+
+
+
+	<!-- 文件上传 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件的最大尺寸为1MB -->
+		<!-- <property name="maxUploadSize">
+			<value>1048576</value>
+		</property> -->
+	</bean>
+
+
+
+	<!-- SpringMVC在超出上传文件限制时，会抛出org.springframework.web.multipart.MaxUploadSizeExceededException -->
+	<!-- 该异常是SpringMVC在检查上传的文件信息时抛出来的，而且此时还没有进入到Controller方法中 <bean id="exceptionResolver" 
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"> 
+		<property name="exceptionMappings"> <props> 遇到MaxUploadSizeExceededException异常时，自动跳转到/WEB-INF/jsp/error_fileupload.jsp页面 
+		<prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">error_fileupload</prop> 
+		</props> </property> </bean> -->
 </beans>  

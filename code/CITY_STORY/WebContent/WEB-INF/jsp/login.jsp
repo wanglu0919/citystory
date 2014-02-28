@@ -5,6 +5,14 @@
 
 <html lang="en">
 <head>
+
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
+%>
+<base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>大城小事管理后台</title>
 
@@ -17,6 +25,98 @@
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script>
+	$(document).ready(function() {
+
+		$("div .alert").hide();
+		$("form").submit(function() {
+			return false;
+		});
+
+		$(".btn").click(function() {
+
+			
+			if(checkInput()){
+				$("div .alert").hide();
+				
+				
+				var username = $("input[name='username']").val();
+				var password = $("input[name='password']").val();
+				
+				var data="username="+username+"&password="+password;
+				
+				$.ajax({
+					  type: 'POST',
+					  url: "./ajaxLodin2.json",
+					  data: data,
+					  success: function(data){
+						  
+						  if(data.success){
+							  
+							  $("div .alert strong").empty();
+								$("div .alert").hide();
+								
+								window.location=data.url;
+								
+								//alert(data.url);
+						  }else{
+							  
+							  showWarring(data.msg);
+						  }
+						 
+						  
+					  },
+					  dataType: "json"
+					});
+				
+				
+				
+				
+				
+				
+			}
+			
+
+		
+		});
+	});
+
+	function showWarring(tip) {/*显示提示信息*/
+
+		$("div .alert strong").empty();
+
+		$("div .alert strong").append(tip);
+
+		$("div .alert").show();
+
+	}
+	
+	function checkInput(){/*检查输入*/
+		var username = $("input[name='username']").val();
+		var password = $("input[name='password']").val();
+
+		var tip = "";
+		if (username == "") {
+			tip = "用户名不能为空";
+			showWarring(tip);
+			return false;
+
+		} else if (password == "") {
+
+			tip = "密码不能为空";
+			showWarring(tip);
+			return false;
+
+		}
+		
+		return true;
+
+		
+		
+		
+	}
+</script>
 
 <style>
 body {
@@ -56,13 +156,17 @@ body {
 <body>
 
 	<div class="login">
+		<div class="alert">
 
-		<form class="form-signin" action="./doLogin" method="post">
+			<strong>提示 !</strong>
+		</div>
+
+		<form class="form-signin">
 			<h2 class="form-signin-heading">大城小事后台管理</h2>
-			<span></span>
-			<input type="text" class="input-block-level" placeholder="usename" name="name">
-			<input type="password" class="input-block-level"
-				placeholder="Password" name="password"> <label class="checkbox"> <input
+			<span></span> <input type="text" class="input-block-level"
+				placeholder="usename" name="username"> <input
+				type="password" class="input-block-level" placeholder="Password"
+				name="password"> <label class="checkbox"> <input
 				type="checkbox" value="remember-me"> 记住我
 			</label>
 			<button class="btn btn-large btn-primary" type="submit">登录</button>

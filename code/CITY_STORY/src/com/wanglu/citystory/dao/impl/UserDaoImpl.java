@@ -28,4 +28,13 @@ public class UserDaoImpl extends BaseImpl implements UserDao {
 		return false;
 	}
 
+	@Override
+	public User findUserByName(String userName) {
+
+		SqlSession sqlSession = getSession();
+		User user = sqlSession.selectOne("findUserByName", userName);
+		sqlSession.close();
+		return user;
+	}
+
 }

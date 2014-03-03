@@ -92,6 +92,9 @@
 	<context:component-scan base-package="com.wanglu.citystory">
 		<context:exclude-filter type="regex"
 			expression="com.wanglu.citystory.controller.*" />
+			
+			<context:exclude-filter type="regex"
+			expression="com.wanglu.citystory.app.controller.*" />
 	</context:component-scan>
 
 

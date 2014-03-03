@@ -10,7 +10,8 @@
 	<!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射 -->
 	<mvc:annotation-driven />
 	<!-- 启动包扫描功能，以便注册带有@Controller、@Service、@repository、@Component等注解的类成为spring的bean -->
-	<context:component-scan base-package="com.wanglu.citystory.controller" />
+	 <context:component-scan base-package="com.wanglu.citystory.controller" />
+	  <context:component-scan base-package="com.wanglu.citystory.app.controller" />
 	<mvc:resources mapping="/img/**" location="/WEB-INF/jsp/img/" />
 	<mvc:resources mapping="/js/**" location="/WEB-INF/jsp/js/" />
 	<mvc:resources mapping="/css/**" location="/WEB-INF/jsp/css/" />
@@ -86,6 +87,14 @@
 			<bean
 				class="com.wanglu.citystory.interceptors.AdminConsoleAuthorityInceptor"></bean>
 		</mvc:interceptor>
+		
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/app/api/**" /><!-- app api调用权限拦截 -->
+			<bean
+				class="com.wanglu.citystory.interceptors.AppApiInceptor"></bean>
+		</mvc:interceptor>
+		
 	</mvc:interceptors>
 
 

@@ -13,6 +13,34 @@ public class User {
 	private String cityId;
 	private String cityName;
 	private String provinceId;
+	private String password;
+	private String accessToken;
+	private long tokenUpdatetTime;
+	private long registTime;
+	public String getAccessToken() {
+		return accessToken;
+	}
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+	public long getTokenUpdatetTime() {
+		return tokenUpdatetTime;
+	}
+	public void setTokenUpdatetTime(long tokenUpdatetTime) {
+		this.tokenUpdatetTime = tokenUpdatetTime;
+	}
+	public long getRegistTime() {
+		return registTime;
+	}
+	public void setRegistTime(long registTime) {
+		this.registTime = registTime;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public String getProvinceId() {
 		return provinceId;
 	}

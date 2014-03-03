@@ -17,5 +17,10 @@ public class UserServiceImpl implements IUserService {
 	public boolean addUser(User user) {
 		return userDao.addUser(user);
 	}
+	@Override
+	public User findUserByName(String userName) {
+	
+		return userDao.findUserByName(userName);
+	}
 
 }

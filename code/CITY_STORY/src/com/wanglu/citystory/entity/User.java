@@ -14,20 +14,15 @@ public class User {
 	private String cityName;
 	private String provinceId;
 	private String password;
-	private String accessToken;
-	private long tokenUpdatetTime;
 	private long registTime;
-	public String getAccessToken() {
-		return accessToken;
+	private OAuth oAuth;
+	
+	
+	public OAuth getoAuth() {
+		return oAuth;
 	}
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
-	public long getTokenUpdatetTime() {
-		return tokenUpdatetTime;
-	}
-	public void setTokenUpdatetTime(long tokenUpdatetTime) {
-		this.tokenUpdatetTime = tokenUpdatetTime;
+	public void setoAuth(OAuth oAuth) {
+		this.oAuth = oAuth;
 	}
 	public long getRegistTime() {
 		return registTime;

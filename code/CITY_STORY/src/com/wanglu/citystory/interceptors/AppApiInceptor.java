@@ -1,14 +1,15 @@
 package com.wanglu.citystory.interceptors;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.wanglu.citystory.entity.Admin;
+import com.wanglu.citystory.entity.OAuth;
+import com.wanglu.citystory.service.IOAuthService;
 
 /**
  * 管理员权限拦截器
@@ -19,6 +20,9 @@ import com.wanglu.citystory.entity.Admin;
 public class AppApiInceptor implements HandlerInterceptor {
 
 	private Logger logger = Logger.getLogger(AppApiInceptor.class);
+
+	@Resource
+	IOAuthService oauthService;
 
 	@Override
 	public void afterCompletion(HttpServletRequest arg0,
@@ -38,7 +42,6 @@ public class AppApiInceptor implements HandlerInterceptor {
 			HttpServletResponse response, Object object) throws Exception {
 
 		String accessToken = request.getParameter("accessToken");
-		System.out.println("进去了拦截器 ");
 
 		if (accessToken == null) {
 			response.getWriter().write("accessToken is null");
@@ -46,7 +49,24 @@ public class AppApiInceptor implements HandlerInterceptor {
 			return false;
 		} else {
 
-			return true;
+			OAuth oAuth = (OAuth) request.getSession()
+					.getAttribute(accessToken);
+
+			boolean valideate = true;
+			if (oAuth == null) {
+				OAuth oa = oauthService.findOAuthByAccessToken(accessToken);// 查询数据库
+
+				if (oa != null) {
+					request.getSession().setAttribute(accessToken, oa);
+
+				} else {
+					response.getWriter().write("accessToken is error");
+					valideate = false;
+				}
+
+			}
+
+			return valideate;
 		}
 
 	}

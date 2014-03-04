@@ -5,21 +5,26 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.util.MD5Encoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wanglu.citystory.entity.OAuth;
 import com.wanglu.citystory.entity.User;
 import com.wanglu.citystory.message.ErrorMessage;
+import com.wanglu.citystory.service.IOAuthService;
 import com.wanglu.citystory.service.IUserService;
-import com.wanglu.citystory.util.Md5Util;
+import com.wanglu.citystory.util.OAuthGenerator;
 import com.wangu.citystory.urls.AppURL;
 
 @Controller
@@ -29,8 +34,20 @@ public class UserController extends BaseController {
 	@Resource
 	IUserService userService;
 
+	@Resource
+	IOAuthService oauthService;
+
+	/**
+	 * 用户注册
+	 * 
+	 * @param mp
+	 * @param jsonData
+	 * @param httpSession
+	 * @return
+	 */
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String regist(ModelMap mp, @RequestBody String jsonData) {
+	public String regist(ModelMap mp, @RequestBody String jsonData,
+			HttpSession httpSession) {
 
 		ObjectMapper objectMapper = new ObjectMapper();
 
@@ -60,12 +77,18 @@ public class UserController extends BaseController {
 			user.setPassword(password);
 			user.setName(name);
 			user.setId(UUID.randomUUID().toString());
-			user.setAccessToken(Md5Util.md5(UUID.randomUUID().toString()));
 			user.setRegistTime(System.currentTimeMillis());
-			user.setTokenUpdatetTime(System.currentTimeMillis());
 			boolean addUserRes = userService.addUser(user);
 			if (addUserRes) {
-				putSuccess(mp, user);
+				OAuth oAuth = OAuthGenerator.generateOAuth(user.getId());
+				boolean addOa = oauthService.addOAuth(oAuth);// 插入oauth
+				if (addOa) {
+					user.setoAuth(oAuth);
+					putSuccess(mp, user);
+
+					httpSession.setAttribute(oAuth.getAccessToken(), oAuth);// 将accessToken放入session
+				}
+
 			}
 
 		} catch (JsonProcessingException e) {
@@ -79,7 +102,55 @@ public class UserController extends BaseController {
 
 		return "regist";
 	}
-	
-	
-	
+
+	@RequestMapping("/api/user/edit")
+	public String apiTest(ModelMap modelMap) {
+		modelMap.put("api", "success");
+		return "我操";
+
+	}
+
+	/**
+	 * 登录
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String appLogin(@RequestParam String name,
+			@RequestParam String password, ModelMap modelMap,
+			HttpSession httpSession, Exception e) {
+
+		System.out.println(e.getMessage());
+
+		if (!name.equals("") && !password.equals("")) {
+
+			User checkUser = userService.findUserByName(name);
+			if (checkUser != null && checkUser.getPassword().equals(password)) {
+
+				OAuth oa = oauthService.findOauthByUserId(checkUser.getId());// 查找oa信息
+
+				if (oa == null) {
+
+					oa = OAuthGenerator.generateOAuth(checkUser.getId());
+					oauthService.addOAuth(oa);
+
+				}
+
+				checkUser.setoAuth(oa);// 放入oa信息
+				httpSession.setAttribute(oa.getAccessToken(), oa);
+				putSuccess(modelMap, checkUser);
+
+			} else {
+
+				putError(modelMap, "用户名密码不正确");
+			}
+
+		} else {
+
+			putError(modelMap, "用户名密码不能为空");
+		}
+
+		return null;
+	}
+
 }

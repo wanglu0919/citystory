@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.wanglu.citystory.entity.OAuth;
 import com.wanglu.citystory.service.IOAuthService;
+import com.wanglu.citystory.util.WebContans;
 
 /**
  * 管理员权限拦截器
@@ -49,24 +50,22 @@ public class AppApiInceptor implements HandlerInterceptor {
 			return false;
 		} else {
 
-			OAuth oAuth = (OAuth) request.getSession()
-					.getAttribute(accessToken);
-
 			boolean valideate = true;
-			if (oAuth == null) {
-				OAuth oa = oauthService.findOAuthByAccessToken(accessToken);// 查询数据库
 
-				if (oa != null) {
-					request.getSession().setAttribute(accessToken, oa);
+			OAuth oa = oauthService.findOAuthByAccessToken(accessToken);// 查询数据库
 
-				} else {
-					response.getWriter().write("accessToken is error");
-					valideate = false;
-				}
+			if (oa == null) {
 
+				response.getWriter().write("accessToken is error");
+				valideate = false;
+
+			}else{
+				
+				request.setAttribute(WebContans.OAUTH_REQUEST_KEY, oa);
 			}
 
 			return valideate;
+
 		}
 
 	}

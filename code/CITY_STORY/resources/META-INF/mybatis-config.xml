@@ -28,6 +28,7 @@
 		<typeAlias alias="Province" type="com.wanglu.citystory.entity.Province" />
 
 		<typeAlias alias="OAuth" type="com.wanglu.citystory.entity.OAuth" />
+		<typeAlias alias="Topic" type="com.wanglu.citystory.entity.Topic" />
 	</typeAliases>
 
 
@@ -38,5 +39,6 @@
 		<mapper resource="com/wanglu/citystory/mapper/Province.xml" />
 		<mapper resource="com/wanglu/citystory/mapper/City.xml" />
 		<mapper resource="com/wanglu/citystory/mapper/OAuth.xml" />
+		<mapper resource="com/wanglu/citystory/mapper/Topic.xml" />
 	</mappers>
 </configuration>

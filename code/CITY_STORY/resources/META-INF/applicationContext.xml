@@ -91,6 +91,10 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
 	
+	<bean id="topicDao" class="com.wanglu.citystory.dao.impl.TopicDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
 	
 	
 	<!-- 自动扫描组件，需要把controller去掉，否则影响事务管理 -->

@@ -5,12 +5,11 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +24,7 @@ import com.wanglu.citystory.message.ErrorMessage;
 import com.wanglu.citystory.service.IOAuthService;
 import com.wanglu.citystory.service.IUserService;
 import com.wanglu.citystory.util.OAuthGenerator;
+import com.wanglu.citystory.util.WebContans;
 import com.wangu.citystory.urls.AppURL;
 
 @Controller
@@ -46,8 +46,8 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String regist(ModelMap mp, @RequestBody String jsonData,
-			HttpSession httpSession) {
+	public String regist(ModelMap mp, @RequestBody String jsonData
+			) {
 
 		ObjectMapper objectMapper = new ObjectMapper();
 
@@ -86,7 +86,7 @@ public class UserController extends BaseController {
 					user.setoAuth(oAuth);
 					putSuccess(mp, user);
 
-					httpSession.setAttribute(oAuth.getAccessToken(), oAuth);// 将accessToken放入session
+				
 				}
 
 			}
@@ -104,8 +104,9 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping("/api/user/edit")
-	public String apiTest(ModelMap modelMap) {
-		modelMap.put("api", "success");
+	public String apiTest(ModelMap modelMap,HttpServletRequest requst) {
+		OAuth oa=(OAuth) requst.getAttribute(WebContans.OAUTH_REQUEST_KEY);
+		modelMap.put("oa", oa);
 		return "我操";
 
 	}
@@ -137,7 +138,7 @@ public class UserController extends BaseController {
 				}
 
 				checkUser.setoAuth(oa);// 放入oa信息
-				httpSession.setAttribute(oa.getAccessToken(), oa);
+				
 				putSuccess(modelMap, checkUser);
 
 			} else {

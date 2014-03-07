@@ -48,6 +48,8 @@ public class UploadController {
 
 			@Override
 			public void run() {
+				
+				
 
 				for (Iterator<String> it = multipartHttpServletRequest
 						.getFileNames(); it.hasNext();) {
